@@ -165,10 +165,12 @@ class SignInPage extends StatelessWidget {
         ),
       );
       return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, '/sign-up');
+        },
         child: Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.only(bottom: 30, top: 333),
+          margin: EdgeInsets.only(bottom: 30),
           child: Text.rich(
             TextSpan(
               text: 'Don\'t have an account? ',
@@ -182,17 +184,17 @@ class SignInPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: mainColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            headerTitle(),
-            emailInput(),
-            passwordInput(),
-            buttonSignIn(),
-            tagLink(),
-          ],
-        ),
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          headerTitle(),
+          emailInput(),
+          passwordInput(),
+          buttonSignIn(),
+          Spacer(),
+          tagLink(),
+        ],
       ),
     );
   }

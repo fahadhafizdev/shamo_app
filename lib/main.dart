@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         '/sign-in': (context) => SignInPage(),
         '/sign-up': (context) => SignUpPage(),
       },
-      initialRoute: '/sign-up',
+      initialRoute: '/sign-in',
     );
   }
 }

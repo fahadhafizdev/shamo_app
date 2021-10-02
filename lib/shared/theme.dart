@@ -11,6 +11,15 @@ TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
 
 TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor);
 
+final ButtonStyle btnStyle = ElevatedButton.styleFrom(
+  primary: purpleColor,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(12),
+    ),
+  ),
+);
+
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;

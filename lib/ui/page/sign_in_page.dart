@@ -43,7 +43,7 @@ class SignInPage extends StatelessWidget {
           vertical: 10,
         ),
         height: 50,
-        width: 315,
+        width: double.infinity,
         child: ElevatedButton(
           onPressed: () {},
           style: btnStyle,

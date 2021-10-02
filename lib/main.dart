@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/ui/splash_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,13 +11,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shamo App',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            'Hello World',
-          ),
-        ),
-      ),
+      routes: {
+        '/': (context) => SplashPage(),
+      },
+      initialRoute: '/',
     );
   }
 }

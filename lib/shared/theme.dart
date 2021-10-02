@@ -6,10 +6,13 @@ Color purpleColor = Color(0xff6C5ECF);
 Color blackColor = Color(0xff504F5E);
 Color whiteColor = Color(0xffF1F0F2);
 Color blueColor = Color(0xff38ABBE);
+Color darkGreyColor = Color(0xff2B2937);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
 
 TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor);
+
+TextStyle purpleTextStyle = GoogleFonts.poppins(color: purpleColor);
 
 final ButtonStyle btnStyle = ElevatedButton.styleFrom(
   primary: purpleColor,

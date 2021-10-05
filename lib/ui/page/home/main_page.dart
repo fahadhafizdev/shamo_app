@@ -17,38 +17,49 @@ class MainPage extends StatelessWidget {
     }
 
     Widget customBottomNav() {
-      return BottomNavigationBar(
-        backgroundColor: bgColor,
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/icon_home.png',
-              width: 21,
-            ),
-            label: '',
+      return ClipRRect(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30),
+        ),
+        child: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          clipBehavior: Clip.antiAlias,
+          notchMargin: 10,
+          child: BottomNavigationBar(
+            backgroundColor: bgColor,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/images/icon_home.png',
+                  width: 21,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/images/icon_chat.png',
+                  width: 20,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/images/icon_love.png',
+                  width: 20,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/images/icon_profile.png',
+                  width: 18,
+                ),
+                label: '',
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/icon_chat.png',
-              width: 20,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/icon_love.png',
-              width: 20,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/icon_profile.png',
-              width: 20,
-            ),
-            label: '',
-          ),
-        ],
+        ),
       );
     }
 
@@ -56,7 +67,7 @@ class MainPage extends StatelessWidget {
       backgroundColor: mainColor,
       floatingActionButton: cardButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: customBottomNav(),
+      bottomNavigationBar: SizedBox(height: 80, child: customBottomNav()),
       body: Center(
         child: Text(
           'Main Page',

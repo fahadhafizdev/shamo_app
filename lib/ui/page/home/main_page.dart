@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     Widget cardButton() {
@@ -26,6 +33,13 @@ class MainPage extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           notchMargin: 10,
           child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (value) {
+              print(value);
+              setState(() {
+                currentIndex = value;
+              });
+            },
             backgroundColor: bgColor,
             type: BottomNavigationBarType.fixed,
             items: [
@@ -33,6 +47,7 @@ class MainPage extends StatelessWidget {
                 icon: Image.asset(
                   'assets/images/icon_home.png',
                   width: 21,
+                  color: (currentIndex == 0) ? purpleColor : null,
                 ),
                 label: '',
               ),
@@ -40,6 +55,7 @@ class MainPage extends StatelessWidget {
                 icon: Image.asset(
                   'assets/images/icon_chat.png',
                   width: 20,
+                  color: (currentIndex == 1) ? purpleColor : null,
                 ),
                 label: '',
               ),
@@ -47,6 +63,7 @@ class MainPage extends StatelessWidget {
                 icon: Image.asset(
                   'assets/images/icon_love.png',
                   width: 20,
+                  color: (currentIndex == 2) ? purpleColor : null,
                 ),
                 label: '',
               ),
@@ -54,6 +71,7 @@ class MainPage extends StatelessWidget {
                 icon: Image.asset(
                   'assets/images/icon_profile.png',
                   width: 18,
+                  color: (currentIndex == 3) ? purpleColor : null,
                 ),
                 label: '',
               ),

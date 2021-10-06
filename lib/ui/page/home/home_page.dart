@@ -100,6 +100,8 @@ class HomePage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: [
             CustomPopularProduct(),
+            CustomPopularProduct(),
+            CustomPopularProduct(),
           ],
         ),
       );

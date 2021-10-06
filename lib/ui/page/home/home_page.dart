@@ -131,7 +131,30 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomNewProduct(),
+            CustomNewProduct(
+              name: 'Predator 20.3 Firm Ground',
+              textCategory: 'Football',
+              imageUrl: 'assets/images/new_shoes1.png',
+              price: 68.47,
+            ),
+            CustomNewProduct(
+              name: 'Ultra 4D 5 Shoes',
+              textCategory: 'Football',
+              imageUrl: 'assets/images/new_shoes2.png',
+              price: 68.47,
+            ),
+            CustomNewProduct(
+              name: 'Court Vision 2.0 Shoes',
+              textCategory: 'Football',
+              imageUrl: 'assets/images/new_shoes3.png',
+              price: 68.47,
+            ),
+            CustomNewProduct(
+              name: 'LEGO® SPORT SHOES',
+              textCategory: 'Football',
+              imageUrl: 'assets/images/new_shoes4.png',
+              price: 68.47,
+            ),
           ],
         ),
       );

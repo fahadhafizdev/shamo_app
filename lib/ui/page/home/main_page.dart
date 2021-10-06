@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/page/home/chat_page.dart';
+import 'package:shamo_app/ui/page/home/home_page.dart';
+import 'package:shamo_app/ui/page/home/profile_page.dart';
+import 'package:shamo_app/ui/page/home/wishlist_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -81,16 +85,27 @@ class _MainPageState extends State<MainPage> {
       );
     }
 
+    Widget body() {
+      switch (currentIndex) {
+        case 0:
+          return HomePage();
+        case 1:
+          return ChatPage();
+        case 2:
+          return WishListPage();
+        case 3:
+          return ProfilePage();
+        default:
+          return HomePage();
+      }
+    }
+
     return Scaffold(
       backgroundColor: mainColor,
       floatingActionButton: cardButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: SizedBox(height: 80, child: customBottomNav()),
-      body: Center(
-        child: Text(
-          'Main Page',
-        ),
-      ),
+      body: body(),
     );
   }
 }

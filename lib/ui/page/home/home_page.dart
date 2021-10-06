@@ -95,13 +95,29 @@ class HomePage extends StatelessWidget {
         height: 278,
         margin: EdgeInsets.only(
           left: defaultMargin,
+          bottom: defaultMargin,
         ),
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
-            CustomPopularProduct(),
-            CustomPopularProduct(),
-            CustomPopularProduct(),
+            CustomPopularProduct(
+              name: 'COURT VISION 2.0',
+              imageUrl: 'assets/images/shoes1.png',
+              textCategory: 'Hiking',
+              price: 58.67,
+            ),
+            CustomPopularProduct(
+              name: 'SL 20 SHOES',
+              imageUrl: 'assets/images/shoes2.png',
+              textCategory: 'Hiking',
+              price: 123.82,
+            ),
+            CustomPopularProduct(
+              name: 'TERREX URBAN LOW',
+              imageUrl: 'assets/images/shoes3.png',
+              textCategory: 'Hiking',
+              price: 143.98,
+            ),
           ],
         ),
       );
@@ -113,6 +129,7 @@ class HomePage extends StatelessWidget {
         categoryContent(),
         titleProduct('Popular Products'),
         listPopularProduct(),
+        titleProduct('New Arrivals'),
       ],
     );
   }

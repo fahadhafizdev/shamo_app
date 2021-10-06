@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomPopularProduct extends StatelessWidget {
+  final String imageUrl;
+  final String textCategory;
+  final String name;
+  final double price;
+
+  CustomPopularProduct({
+    this.name,
+    this.imageUrl,
+    this.textCategory,
+    this.price,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +37,7 @@ class CustomPopularProduct extends StatelessWidget {
             margin: EdgeInsets.only(bottom: defaultMargin),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/shoes1.png'),
+                image: AssetImage(imageUrl),
               ),
             ),
           ),
@@ -35,7 +47,7 @@ class CustomPopularProduct extends StatelessWidget {
               bottom: 6,
             ),
             child: Text(
-              'Hiking',
+              textCategory,
               style: greyTextStyle.copyWith(fontSize: 12),
             ),
           ),
@@ -45,7 +57,7 @@ class CustomPopularProduct extends StatelessWidget {
               bottom: 6,
             ),
             child: Text(
-              'COURT VISION 2.0',
+              name,
               style: blackTextStyle.copyWith(
                 fontSize: 18,
                 fontWeight: semiBold,
@@ -57,7 +69,7 @@ class CustomPopularProduct extends StatelessWidget {
               left: 20,
             ),
             child: Text(
-              '\$58,67',
+              '\$$price',
               style: blueTextStyle.copyWith(
                 fontSize: 14,
                 fontWeight: medium,

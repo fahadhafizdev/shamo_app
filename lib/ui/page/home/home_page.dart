@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/customCategoryWidget.dart';
+import 'package:shamo_app/ui/widget/custom_new_product_widget.dart';
 import 'package:shamo_app/ui/widget/custom_popular_product_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -123,6 +124,19 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget listNewProduct() {
+      return Container(
+        margin: EdgeInsets.only(left: defaultMargin),
+        width: 290,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomNewProduct(),
+          ],
+        ),
+      );
+    }
+
     return ListView(
       children: [
         headerContent(),
@@ -130,6 +144,7 @@ class HomePage extends StatelessWidget {
         titleProduct('Popular Products'),
         listPopularProduct(),
         titleProduct('New Arrivals'),
+        listNewProduct(),
       ],
     );
   }

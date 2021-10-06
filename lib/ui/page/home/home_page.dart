@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/customCategoryWidget.dart';
+import 'package:shamo_app/ui/widget/custom_popular_product_widget.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -89,11 +90,27 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget listPopularProduct() {
+      return Container(
+        height: 278,
+        margin: EdgeInsets.only(
+          left: defaultMargin,
+        ),
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            CustomPopularProduct(),
+          ],
+        ),
+      );
+    }
+
     return ListView(
       children: [
         headerContent(),
         categoryContent(),
         titleProduct('Popular Products'),
+        listPopularProduct(),
       ],
     );
   }

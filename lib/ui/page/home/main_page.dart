@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
         child: BottomAppBar(
           shape: CircularNotchedRectangle(),
           clipBehavior: Clip.antiAlias,
-          notchMargin: 10,
+          notchMargin: 12,
           child: BottomNavigationBar(
             currentIndex: currentIndex,
             onTap: (value) {
@@ -48,34 +48,58 @@ class _MainPageState extends State<MainPage> {
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_home.png',
-                  width: 21,
-                  color: (currentIndex == 0) ? purpleColor : null,
+                icon: Container(
+                  margin: EdgeInsets.only(
+                    top: 30,
+                    bottom: 10,
+                  ),
+                  child: Image.asset(
+                    'assets/images/icon_home.png',
+                    width: 21,
+                    color: (currentIndex == 0) ? purpleColor : null,
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_chat.png',
-                  width: 20,
-                  color: (currentIndex == 1) ? purpleColor : null,
+                icon: Container(
+                  margin: EdgeInsets.only(
+                    top: 30,
+                    bottom: 10,
+                  ),
+                  child: Image.asset(
+                    'assets/images/icon_chat.png',
+                    width: 20,
+                    color: (currentIndex == 1) ? purpleColor : null,
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_love.png',
-                  width: 20,
-                  color: (currentIndex == 2) ? purpleColor : null,
+                icon: Container(
+                  margin: EdgeInsets.only(
+                    top: 30,
+                    bottom: 10,
+                  ),
+                  child: Image.asset(
+                    'assets/images/icon_love.png',
+                    width: 20,
+                    color: (currentIndex == 2) ? purpleColor : null,
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_profile.png',
-                  width: 18,
-                  color: (currentIndex == 3) ? purpleColor : null,
+                icon: Container(
+                  margin: EdgeInsets.only(
+                    top: 30,
+                    bottom: 10,
+                  ),
+                  child: Image.asset(
+                    'assets/images/icon_profile.png',
+                    width: 18,
+                    color: (currentIndex == 3) ? purpleColor : null,
+                  ),
                 ),
                 label: '',
               ),
@@ -104,7 +128,7 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: mainColor,
       floatingActionButton: cardButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: SizedBox(height: 80, child: customBottomNav()),
+      bottomNavigationBar: customBottomNav(),
       body: body(),
     );
   }

@@ -9,6 +9,8 @@ Color blueColor = Color(0xff38ABBE);
 Color darkGreyColor = Color(0xff2B2937);
 Color bgColor = Color(0xff252836);
 
+double defaultMargin = 30.0;
+
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
 
 TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor);

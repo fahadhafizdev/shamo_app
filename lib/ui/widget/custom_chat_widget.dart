@@ -14,7 +14,7 @@ class CustomChatWidget extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: blackColor,
+            color: Color(0xff2B2939),
             style: BorderStyle.solid,
           ),
         ),
@@ -36,12 +36,12 @@ class CustomChatWidget extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: 189,
-            margin: EdgeInsets.only(top: 10),
+          Expanded(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 8),
                 Text(
                   'Shoe Store',
                   style: whiteTextStyle.copyWith(

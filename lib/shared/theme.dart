@@ -9,6 +9,7 @@ Color blueColor = Color(0xff38ABBE);
 Color darkGreyColor = Color(0xff2B2937);
 Color bgColor = Color(0xff252836);
 Color greyColor = Color(0xff999999);
+Color darkPurple = Color(0xff1F1D2B);
 
 double defaultMargin = 30.0;
 
@@ -21,6 +22,8 @@ TextStyle purpleTextStyle = GoogleFonts.poppins(color: purpleColor);
 TextStyle greyTextStyle = GoogleFonts.poppins(color: greyColor);
 
 TextStyle blueTextStyle = GoogleFonts.poppins(color: blueColor);
+
+TextStyle darkPurpleTextStyle = GoogleFonts.poppins();
 
 final ButtonStyle btnStyle = ElevatedButton.styleFrom(
   primary: purpleColor,

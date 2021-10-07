@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_chat_widget.dart';
 import 'package:shamo_app/ui/widget/custom_header_widget.dart';
 
 class ChatPage extends StatelessWidget {
@@ -50,10 +51,21 @@ class ChatPage extends StatelessWidget {
       );
     }
 
-    return Column(
+    Widget content() {
+      return Column(
+        children: [
+          CustomChatWidget(),
+          CustomChatWidget(),
+          CustomChatWidget(),
+        ],
+      );
+    }
+
+    return ListView(
       children: [
         CustomHeader(text: 'Message Support'),
-        contentNoMessage(),
+        SizedBox(height: 21),
+        content(),
       ],
     );
   }

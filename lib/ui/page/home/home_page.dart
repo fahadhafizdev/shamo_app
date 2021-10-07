@@ -13,23 +13,25 @@ class HomePage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hallo, Hafiz',
-                  style: whiteTextStyle.copyWith(
-                    fontWeight: semiBold,
-                    fontSize: 24,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hallo, Hafiz',
+                    style: whiteTextStyle.copyWith(
+                      fontWeight: semiBold,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                Text(
-                  '@hafizudin.d',
-                  style: blackTextStyle.copyWith(
-                    fontSize: 16,
+                  Text(
+                    '@hafizudin.d',
+                    style: blackTextStyle.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Image.asset(
               'assets/images/user_photo.png',

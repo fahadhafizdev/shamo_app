@@ -60,6 +60,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 label: '',
+                tooltip: 'home',
               ),
               BottomNavigationBarItem(
                 icon: Container(
@@ -74,6 +75,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 label: '',
+                tooltip: 'chat',
               ),
               BottomNavigationBarItem(
                 icon: Container(
@@ -88,6 +90,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 label: '',
+                tooltip: 'wishlist',
               ),
               BottomNavigationBarItem(
                 icon: Container(
@@ -102,6 +105,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 label: '',
+                tooltip: 'profil',
               ),
             ],
           ),

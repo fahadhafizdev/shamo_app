@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_chat_buble_widget.dart';
 
 class DetailChatPage extends StatelessWidget {
   @override
@@ -99,45 +100,68 @@ class DetailChatPage extends StatelessWidget {
       );
     }
 
+    Widget chatList() {
+      return ListView(
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        children: [
+          CustomChatBuble(
+            text:
+                'Hi, This item is still availablessssssssssssssssssssssssssssssssssssss?',
+            isSender: true,
+          ),
+          CustomChatBuble(
+            text:
+                'Hi, yes this item is availablesssssssssssssssssssssssssssssssssssssssssssssssssss',
+            isSender: false,
+          ),
+        ],
+      );
+    }
+
     Widget chatInput() {
-      return Container(
-        margin: EdgeInsets.all(20),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            productReview(),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 45,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 16,
-                    ),
-                    decoration: BoxDecoration(
-                      color: bgColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: TextFormField(
-                      style: whiteTextStyle,
-                      decoration: InputDecoration.collapsed(
-                        hintText: 'Typle Message...',
-                        hintStyle: blackTextStyle,
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          margin: EdgeInsets.all(20),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              productReview(),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 45,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      decoration: BoxDecoration(
+                        color: bgColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextFormField(
+                        style: whiteTextStyle,
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Typle Message...',
+                          hintStyle: blackTextStyle,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(width: 20),
-                Image.asset(
-                  'assets/images/btn_send.png',
-                  height: 45,
-                ),
-              ],
-            ),
-          ],
+                  SizedBox(width: 20),
+                  Image.asset(
+                    'assets/images/btn_send.png',
+                    height: 45,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -148,10 +172,8 @@ class DetailChatPage extends StatelessWidget {
       // bottomNavigationBar: chatInput(),
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: chatInput(),
-          ),
+          chatList(),
+          chatInput(),
         ],
       ),
     );

@@ -42,37 +42,100 @@ class DetailChatPage extends StatelessWidget {
       );
     }
 
-    Widget chatInput() {
+    Widget productReview() {
       return Container(
-        margin: EdgeInsets.all(20),
-        height: 45,
-        width: double.infinity,
+        height: 74,
+        width: 225,
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: 20),
+        decoration: BoxDecoration(
+          color: purpleColor.withOpacity(
+            0.2,
+          ),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: purpleColor),
+        ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                'assets/images/new_shoes1.png',
+                height: 54,
+              ),
+            ),
+            SizedBox(width: 11),
             Expanded(
-              child: Container(
-                height: 45,
-                padding: EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: bgColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: TextFormField(
-                  style: whiteTextStyle,
-                  decoration: InputDecoration.collapsed(
-                    hintText: 'Typle Message...',
-                    hintStyle: blackTextStyle,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'COURT VISIOONER ICE',
+                    style: whiteTextStyle,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    '\$57.15',
+                    style: blueTextStyle.copyWith(fontWeight: medium),
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: 22,
+              width: 22,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/icon_refuse_round.png',
                   ),
                 ),
               ),
             ),
-            SizedBox(width: 20),
-            Image.asset(
-              'assets/images/btn_send.png',
-              height: 45,
+          ],
+        ),
+      );
+    }
+
+    Widget chatInput() {
+      return Container(
+        margin: EdgeInsets.all(20),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            productReview(),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 45,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: TextFormField(
+                      style: whiteTextStyle,
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'Typle Message...',
+                        hintStyle: blackTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20),
+                Image.asset(
+                  'assets/images/btn_send.png',
+                  height: 45,
+                ),
+              ],
             ),
           ],
         ),

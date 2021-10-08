@@ -34,6 +34,16 @@ final ButtonStyle btnStyle = ElevatedButton.styleFrom(
   ),
 );
 
+final ButtonStyle btnStyle2 = ElevatedButton.styleFrom(
+  primary: purpleColor.withOpacity(0.1),
+  side: BorderSide(color: purpleColor, style: BorderStyle.solid, width: 1.0),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(8),
+    ),
+  ),
+);
+
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;

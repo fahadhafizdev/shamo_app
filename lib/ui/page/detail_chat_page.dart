@@ -110,6 +110,7 @@ class DetailChatPage extends StatelessWidget {
             text:
                 'Hi, This item is still availablessssssssssssssssssssssssssssssssssssss?',
             isSender: true,
+            hasProduct: true,
           ),
           CustomChatBuble(
             text:

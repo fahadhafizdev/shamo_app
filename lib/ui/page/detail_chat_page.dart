@@ -8,6 +8,10 @@ class DetailChatPage extends StatelessWidget {
     Widget header() {
       return PreferredSize(
         child: AppBar(
+          leading: Icon(
+            Icons.arrow_back_ios,
+            size: 18,
+          ),
           backgroundColor: darkPurple,
           centerTitle: false,
           title: Row(

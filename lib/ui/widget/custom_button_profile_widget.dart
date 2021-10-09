@@ -7,8 +7,16 @@ class CustomButtonProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+    return Container(
+      height: 35,
+      margin: EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: blackColor.withOpacity(0.2),
+          ),
+        ),
+      ),
       child: Row(
         children: [
           Expanded(
@@ -19,8 +27,8 @@ class CustomButtonProfile extends StatelessWidget {
           ),
           Image.asset(
             'assets/images/icon_arrow.png',
-            height: 6,
-            width: 12,
+            height: 8,
+            width: 14,
           ),
         ],
       ),

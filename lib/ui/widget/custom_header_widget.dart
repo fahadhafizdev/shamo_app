@@ -10,13 +10,26 @@ class CustomHeader extends StatelessWidget {
     return AppBar(
       backgroundColor: darkPurple,
       centerTitle: true,
-      title: Text(
-        '$text',
-        style: whiteTextStyle.copyWith(
-          fontWeight: medium,
-          fontSize: 18,
+      flexibleSpace: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 30,
+        ),
+        child: Text(
+          '$text',
+          style: whiteTextStyle.copyWith(
+            fontWeight: medium,
+            fontSize: 18,
+          ),
+          textAlign: TextAlign.center,
         ),
       ),
+      // title: Text(
+      //   '$text',
+      //   style: whiteTextStyle.copyWith(
+      //     fontWeight: medium,
+      //     fontSize: 18,
+      //   ),
+      // ),
       elevation: 0,
       automaticallyImplyLeading: false,
     );

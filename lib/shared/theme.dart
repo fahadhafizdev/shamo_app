@@ -10,6 +10,7 @@ Color darkGreyColor = Color(0xff2B2937);
 Color bgColor = Color(0xff252836);
 Color greyColor = Color(0xff999999);
 Color darkPurple = Color(0xff1F1D2B);
+Color bgColor2 = Color(0xff242231);
 
 double defaultMargin = 30.0;
 

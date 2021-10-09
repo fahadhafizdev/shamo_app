@@ -73,8 +73,21 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            CustomButtonProfile(),
-            CustomButtonProfile(),
+            CustomButtonProfile(text: 'Edit Profile'),
+            CustomButtonProfile(text: 'Your Orders'),
+            CustomButtonProfile(text: 'Help'),
+            SizedBox(height: defaultMargin),
+            Text(
+              'General',
+              style: whiteTextStyle.copyWith(
+                fontWeight: semiBold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 16),
+            CustomButtonProfile(text: 'Privacy & Policy'),
+            CustomButtonProfile(text: 'Term of Service'),
+            CustomButtonProfile(text: 'Rate App'),
           ],
         ),
       );

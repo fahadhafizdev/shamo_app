@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomButtonProfile extends StatelessWidget {
+  final String text;
+  CustomButtonProfile({this.text});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,7 +13,7 @@ class CustomButtonProfile extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'Edit Profile',
+              text,
               style: blackTextStyle.copyWith(fontSize: 15),
             ),
           ),

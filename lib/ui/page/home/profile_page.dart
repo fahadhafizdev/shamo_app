@@ -76,8 +76,7 @@ class ProfilePage extends StatelessWidget {
             CustomButtonProfile(
               text: 'Edit Profile',
               function: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/edit-profile', (route) => false);
+                Navigator.pushNamed(context, '/edit-profile');
               },
             ),
             CustomButtonProfile(text: 'Your Orders'),

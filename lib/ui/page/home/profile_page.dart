@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_button_profile_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -55,9 +56,34 @@ class ProfilePage extends StatelessWidget {
       );
     }
 
-    return Column(
+    Widget content() {
+      return Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+          vertical: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Account',
+              style: whiteTextStyle.copyWith(
+                fontWeight: semiBold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 16),
+            CustomButtonProfile(),
+            CustomButtonProfile(),
+          ],
+        ),
+      );
+    }
+
+    return ListView(
       children: [
         header(),
+        content(),
       ],
     );
   }

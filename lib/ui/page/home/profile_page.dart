@@ -69,11 +69,17 @@ class ProfilePage extends StatelessWidget {
               'Account',
               style: whiteTextStyle.copyWith(
                 fontWeight: semiBold,
-                fontSize: 18,
+                fontSize: 17,
               ),
             ),
             SizedBox(height: 16),
-            CustomButtonProfile(text: 'Edit Profile'),
+            CustomButtonProfile(
+              text: 'Edit Profile',
+              function: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/edit-profile', (route) => false);
+              },
+            ),
             CustomButtonProfile(text: 'Your Orders'),
             CustomButtonProfile(text: 'Help'),
             SizedBox(height: defaultMargin),
@@ -81,7 +87,7 @@ class ProfilePage extends StatelessWidget {
               'General',
               style: whiteTextStyle.copyWith(
                 fontWeight: semiBold,
-                fontSize: 18,
+                fontSize: 17,
               ),
             ),
             SizedBox(height: 16),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_header_widget.dart';
+import 'package:shamo_app/ui/widget/custom_wishlist_widget.dart';
 
 class WishListPage extends StatelessWidget {
   @override
@@ -47,10 +48,21 @@ class WishListPage extends StatelessWidget {
       );
     }
 
-    return Column(
+    Widget content() {
+      return Column(
+        children: [
+          CustomWishList(),
+          CustomWishList(),
+          CustomWishList(),
+        ],
+      );
+    }
+
+    return ListView(
       children: [
         CustomHeader(text: 'Favorite Shoes'),
-        contentNoMessage(),
+        SizedBox(height: 21),
+        content(),
       ],
     );
   }

@@ -52,10 +52,13 @@ class _DetailProductPageState extends State<DetailProductPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  color: darkPurple,
-                  size: 24.0,
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: darkPurple,
+                    size: 24.0,
+                  ),
                 ),
                 Icon(
                   Icons.shopping_bag_rounded,
@@ -223,6 +226,43 @@ class _DetailProductPageState extends State<DetailProductPage> {
                 children: imageUrl
                     .map((imageUrl) => CustomImage(imageUrl: imageUrl))
                     .toList(),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                left: defaultMargin,
+                right: defaultMargin,
+                top: defaultMargin,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 16),
+                    height: 54,
+                    width: 54,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/btn_chat.png'),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 54,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: btnStyle,
+                        child: Text(
+                          'Add to Cart',
+                          style: whiteTextStyle.copyWith(
+                            fontWeight: semiBold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

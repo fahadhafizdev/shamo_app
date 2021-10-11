@@ -105,6 +105,8 @@ class _DetailProductPageState extends State<DetailProductPage> {
     }
 
     Widget content() {
+      int indexListShoes = -1;
+
       return Container(
         margin: EdgeInsets.only(top: 17),
         width: double.infinity,
@@ -223,9 +225,17 @@ class _DetailProductPageState extends State<DetailProductPage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: imageUrl
-                    .map((imageUrl) => CustomImage(imageUrl: imageUrl))
-                    .toList(),
+                children: imageUrl.map((imageUrl) {
+                  indexListShoes++;
+                  if (indexListShoes == 0) {
+                    return Container(
+                        margin: EdgeInsets.only(left: 14),
+                        child: CustomImage(imageUrl: imageUrl));
+                  }
+
+                  print(indexListShoes);
+                  return CustomImage(imageUrl: imageUrl);
+                }).toList(),
               ),
             ),
             Container(

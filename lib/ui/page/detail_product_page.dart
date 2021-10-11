@@ -2,16 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class DetailProductPage extends StatelessWidget {
-  List images = [
+class DetailProductPage extends StatefulWidget {
+  @override
+  State<DetailProductPage> createState() => _DetailProductPageState();
+}
+
+class _DetailProductPageState extends State<DetailProductPage> {
+  final List images = [
     'assets/images/shoes1_1.png',
     'assets/images/shoes1_2.png',
     'assets/images/shoes1_3.png',
   ];
 
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    Widget indicators(int index) {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: 2),
+        width: (index == currentIndex) ? 16 : 4,
+        height: 4,
+        decoration: BoxDecoration(
+          color: (index == currentIndex) ? purpleColor : Color(0xffC4C4C4),
+          borderRadius: BorderRadius.circular(10),
+        ),
+      );
+    }
+
     Widget header() {
+      int index = -1;
       return Column(
         children: [
           Container(
@@ -47,8 +67,27 @@ class DetailProductPage extends StatelessWidget {
                   ),
                 )
                 .toList(),
-            options: CarouselOptions(),
+            options: CarouselOptions(
+              initialPage: 0,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                  print('$reason : $currentIndex');
+                });
+              },
+            ),
           ),
+          SizedBox(
+            height: 25,
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: images.map((e) {
+                print(index);
+                index++;
+
+                return indicators(index);
+              }).toList()),
         ],
       );
     }

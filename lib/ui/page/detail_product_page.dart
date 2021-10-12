@@ -24,6 +24,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
   ];
 
   int currentIndex = 0;
+  bool isWishList = false;
 
   @override
   Widget build(BuildContext context) {
@@ -146,13 +147,35 @@ class _DetailProductPageState extends State<DetailProductPage> {
                       )
                     ],
                   ),
-                  Container(
-                    height: 46,
-                    width: 46,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/icon_love_round_nonactived.png'),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isWishList = !isWishList;
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: isWishList
+                              ? Text(
+                                  'Has been added to the Whitelist',
+                                  textAlign: TextAlign.center,
+                                )
+                              : Text(
+                                  'Has been removed from the Whitelist',
+                                  textAlign: TextAlign.center,
+                                ),
+                          backgroundColor: isWishList ? blueColor : Colors.red,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 46,
+                      width: 46,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(isWishList
+                              ? 'assets/images/icon_love_round_actived.png'
+                              : 'assets/images/icon_love_round_nonactived.png'),
+                        ),
                       ),
                     ),
                   ),

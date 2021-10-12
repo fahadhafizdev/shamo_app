@@ -28,6 +28,74 @@ class _DetailProductPageState extends State<DetailProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> showSuccessDialog() async {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) => Container(
+          width: MediaQuery.of(context).size.width - (2 * defaultMargin),
+          child: AlertDialog(
+            backgroundColor: bgColor2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Icon(
+                        Icons.close,
+                        color: whiteColor,
+                      ),
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/images/icon_checkList.png',
+                    height: 100,
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'Hurray :)',
+                    style: whiteTextStyle.copyWith(
+                      fontWeight: semiBold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'Item added successfully',
+                    style: blackTextStyle.copyWith(
+                      color: Color(0xff999999),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                    height: 44,
+                    width: 154,
+                    child: ElevatedButton(
+                      style: btnStyle,
+                      onPressed: () {},
+                      child: Text(
+                        'View My Cart',
+                        style: whiteTextStyle.copyWith(
+                          fontWeight: medium,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     Widget indicators(int index) {
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 2),
@@ -269,13 +337,18 @@ class _DetailProductPageState extends State<DetailProductPage> {
               ),
               child: Row(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 16),
-                    height: 54,
-                    width: 54,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/btn_chat.png'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/detail-chat-page');
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(right: 16),
+                      height: 54,
+                      width: 54,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/btn_chat.png'),
+                        ),
                       ),
                     ),
                   ),
@@ -283,7 +356,9 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     child: Container(
                       height: 54,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showSuccessDialog();
+                        },
                         style: btnStyle,
                         child: Text(
                           'Add to Cart',

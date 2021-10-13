@@ -76,7 +76,10 @@ class _CartPageState extends State<CartPage> {
               margin: EdgeInsets.symmetric(vertical: 20),
               child: ElevatedButton(
                 style: btnStyle,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/main-page', (route) => false);
+                },
                 child: Text(
                   'Explore Store',
                   style: whiteTextStyle.copyWith(
@@ -227,9 +230,65 @@ class _CartPageState extends State<CartPage> {
       );
     }
 
+    Widget customBottomnNav() {
+      return Container(
+        height: 165,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Subtotal',
+                    style: whiteTextStyle,
+                  ),
+                  Text(
+                    '\$287,96',
+                    style: blueTextStyle.copyWith(
+                      fontWeight: semiBold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30),
+            Divider(
+              thickness: 0.5,
+              color: laneColor,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+              height: 50,
+              child: ElevatedButton(
+                style: btnStyle,
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Continue to Checkout',
+                      style: whiteTextStyle.copyWith(
+                        fontWeight: semiBold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Icon(Icons.arrow_forward_ios),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: header(),
       backgroundColor: bgColor2,
+      bottomNavigationBar: customBottomnNav(),
       body: content(),
     );
   }

@@ -264,7 +264,9 @@ class _CartPageState extends State<CartPage> {
               height: 50,
               child: ElevatedButton(
                 style: btnStyle,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/checkout-detail');
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

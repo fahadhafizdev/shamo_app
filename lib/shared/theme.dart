@@ -15,6 +15,7 @@ Color bgColor3 = Color(0xffECEDEF);
 Color bgColor4 = Color(0xff252836);
 Color redColor = Color(0xffED6363);
 Color laneColor = Color(0xff2B2938);
+Color laneColor2 = Color(0xff2E3141);
 
 double defaultMargin = 30.0;
 

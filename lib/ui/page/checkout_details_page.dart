@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_list_checkout_widget.dart';
+import 'package:shamo_app/ui/widget/custom_payment_summary.widget.dart';
 
 class CheckoutDetailsPage extends StatelessWidget {
   @override
@@ -169,7 +170,6 @@ class CheckoutDetailsPage extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.all(defaultMargin),
-            height: 198,
             width: double.infinity,
             decoration: BoxDecoration(
               color: bgColor4,
@@ -186,13 +186,28 @@ class CheckoutDetailsPage extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 12),
-                Text(
-                  'Product Quantity',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 12,
-                  ),
-                )
+                SizedBox(height: 1),
+                CustomPaymentSummary(
+                  name: 'Product Quantity',
+                  value: '2 Items',
+                ),
+                CustomPaymentSummary(
+                  name: 'Product Price',
+                  value: '\$575.96',
+                ),
+                CustomPaymentSummary(
+                  name: 'Shipping',
+                  value: 'Free',
+                ),
+                Divider(
+                  color: laneColor2,
+                  thickness: 1.0,
+                ),
+                SizedBox(height: 10),
+                CustomPaymentSummary(
+                  name: 'Total',
+                  value: '\$575.92',
+                ),
               ],
             ),
           ),

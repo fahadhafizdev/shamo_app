@@ -114,7 +114,20 @@ class CheckoutDetailsPage extends StatelessWidget {
                 Row(
                   children: [
                     Column(
-                      children: [],
+                      children: [
+                        Image.asset(
+                          'assets/images/icon_storeloc.png',
+                          height: 40,
+                        ),
+                        Image.asset(
+                          'assets/images/icon_line.png',
+                          height: 30,
+                        ),
+                        Image.asset(
+                          'assets/images/icon_loc.png',
+                          width: 40,
+                        ),
+                      ],
                     )
                   ],
                 )

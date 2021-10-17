@@ -44,7 +44,10 @@ class CheckoutDetailsPage extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 style: btnStyle,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/checkout-success', (route) => false);
+                },
                 child: Text(
                   'Checkout Now',
                   style: whiteTextStyle.copyWith(

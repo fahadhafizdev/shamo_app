@@ -50,6 +50,15 @@ final ButtonStyle btnStyle2 = ElevatedButton.styleFrom(
   ),
 );
 
+final ButtonStyle btnStyle3 = ElevatedButton.styleFrom(
+  primary: Color(0xff39374B),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(12),
+    ),
+  ),
+);
+
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;

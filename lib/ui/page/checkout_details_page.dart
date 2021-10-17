@@ -77,6 +77,7 @@ class CheckoutDetailsPage extends StatelessWidget {
               ),
             ),
           ),
+          //NOTE: : LIST ITEM
           CustomListCheckout(
             name: 'Terrex Urban Low',
             price: 143.98,
@@ -112,6 +113,7 @@ class CheckoutDetailsPage extends StatelessWidget {
                 ),
                 SizedBox(height: 12),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
                       children: [
@@ -128,12 +130,72 @@ class CheckoutDetailsPage extends StatelessWidget {
                           width: 40,
                         ),
                       ],
+                    ),
+                    SizedBox(width: 12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Store Location',
+                          style: greyTextStyle.copyWith(
+                            fontWeight: light,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 1),
+                        Text(
+                          'Adidas Core',
+                          style: whiteTextStyle.copyWith(fontWeight: medium),
+                        ),
+                        SizedBox(height: 30),
+                        Text(
+                          'Your Address',
+                          style: greyTextStyle.copyWith(
+                            fontWeight: light,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 1),
+                        Text(
+                          'Marsemoon',
+                          style: whiteTextStyle.copyWith(fontWeight: medium),
+                        ),
+                      ],
                     )
                   ],
                 )
               ],
             ),
-          )
+          ),
+          Container(
+            margin: EdgeInsets.all(defaultMargin),
+            height: 198,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: bgColor4,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Payment Summary',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: medium,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  'Product Quantity',
+                  style: greyTextStyle.copyWith(
+                    fontSize: 12,
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       );
     }

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         '/checkout-detail': (context) => CheckoutDetailsPage(),
         '/checkout-success': (context) => CheckoutSuccess(),
       },
-      initialRoute: '/main-page',
+      initialRoute: '/',
     );
   }
 }

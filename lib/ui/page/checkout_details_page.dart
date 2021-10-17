@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_list_checkout_widget.dart';
 
 class CheckoutDetailsPage extends StatelessWidget {
   @override
@@ -76,65 +77,50 @@ class CheckoutDetailsPage extends StatelessWidget {
               ),
             ),
           ),
+          CustomListCheckout(
+            name: 'Terrex Urban Low',
+            price: 143.98,
+            amount: 2,
+            imageUrl: 'assets/images/shoes1.png',
+          ),
+          CustomListCheckout(
+            name: 'Terrex Urban Low',
+            price: 143.98,
+            amount: 3,
+            imageUrl: 'assets/images/shoes2.png',
+          ),
+
+          //NOTE: ADDRESS DETAIL
           Container(
-            height: 100,
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            padding: EdgeInsets.all(20),
+            height: 186,
             width: double.infinity,
-            margin: EdgeInsets.symmetric(
-              horizontal: defaultMargin,
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 12,
-            ),
             decoration: BoxDecoration(
               color: bgColor4,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.only(right: 12),
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: whiteColor,
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/shoes1.png'),
-                    ),
-                    borderRadius: BorderRadius.circular(12),
+                Text(
+                  'Address Details',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: medium,
+                    fontSize: 16,
                   ),
                 ),
-                //NOTE: TEXTS
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Terrex Urban Low',
-                        overflow: TextOverflow.clip,
-                        style: whiteTextStyle.copyWith(fontWeight: semiBold),
-                      ),
-                      Text(
-                        '\$143,98',
-                        overflow: TextOverflow.clip,
-                        style: blueTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: Text(
-                    '2 Items',
-                    style: blackTextStyle.copyWith(
-                      color: greyColor,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
+                SizedBox(height: 12),
+                Row(
+                  children: [
+                    Column(
+                      children: [],
+                    )
+                  ],
+                )
               ],
             ),
-          ),
+          )
         ],
       );
     }

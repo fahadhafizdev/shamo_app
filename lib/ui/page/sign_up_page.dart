@@ -1,9 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_button_loading_widget.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController nameController = TextEditingController(text: '');
+
+  final TextEditingController usernameController =
+      TextEditingController(text: '');
+
+  final TextEditingController emailController = TextEditingController(text: '');
+
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignUp() async {
+      setState(() {
+        isLoading = true;
+      });
+      if (await authProvider.register(
+        name: nameController.text,
+        username: usernameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/main-page',
+          (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: redColor,
+            content: Text('Register Gagal'),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     Widget headerTitle() {
       return Container(
         height: 60,
@@ -31,28 +82,6 @@ class SignUpPage extends StatelessWidget {
               ),
             )
           ],
-        ),
-      );
-    }
-
-    Widget buttonSignUp() {
-      return Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 30,
-          vertical: 10,
-        ),
-        height: 50,
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () {},
-          style: btnStyle,
-          child: Text(
-            'Sign Up',
-            style: whiteTextStyle.copyWith(
-              fontWeight: medium,
-              fontSize: 16,
-            ),
-          ),
         ),
       );
     }
@@ -95,6 +124,7 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: nameController,
                         style: whiteTextStyle,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Full Name',
@@ -149,6 +179,7 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: usernameController,
                         style: whiteTextStyle,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Username',
@@ -197,6 +228,7 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: passwordController,
                         style: whiteTextStyle,
                         obscureText: true,
                         decoration: InputDecoration.collapsed(
@@ -248,6 +280,7 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: emailController,
                         style: whiteTextStyle,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Email Address',
@@ -262,6 +295,30 @@ class SignUpPage extends StatelessWidget {
           ],
         ),
       );
+    }
+
+    Widget buttonSignUp() {
+      return isLoading
+          ? CustomButtonLoading()
+          : Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 30,
+                vertical: 10,
+              ),
+              height: 50,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: handleSignUp,
+                style: btnStyle,
+                child: Text(
+                  'Sign Up',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: medium,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            );
     }
 
     Widget tagLink() {

@@ -43,15 +43,17 @@ class AuthService {
 
   Future<UserModel> login(String email, String password) async {
     var url = '$baseUrl/login';
+    var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'email': email,
       'password': password,
     });
 
-    var response = await http.post({
+    var response = await http.post(
       url,
-      body,
-    });
+      headers: headers,
+      body: body,
+    );
 
     print('status login : ${response.statusCode}');
     print('status body : ${response.body}');
@@ -60,8 +62,10 @@ class AuthService {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
       user.token = 'Bearer ' + data['access_token'];
+
+      return user;
     } else {
-      Exception('Gagal Login');
+      throw Exception('Gagal Login');
     }
   }
 }

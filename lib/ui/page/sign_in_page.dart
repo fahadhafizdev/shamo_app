@@ -1,9 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_button_loading_widget.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final TextEditingController emailController = TextEditingController(text: '');
+
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleLogin() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+        emailController.text,
+        passwordController.text,
+      )) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/main-page',
+          (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: redColor,
+            content: Text('Login Gagal'),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     Widget headerTitle() {
       return Container(
         height: 60,
@@ -36,25 +81,27 @@ class SignInPage extends StatelessWidget {
     }
 
     Widget buttonSignIn() {
-      return Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 30,
-          vertical: 10,
-        ),
-        height: 50,
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () {},
-          style: btnStyle,
-          child: Text(
-            'Sign In',
-            style: whiteTextStyle.copyWith(
-              fontWeight: medium,
-              fontSize: 16,
-            ),
-          ),
-        ),
-      );
+      return isLoading
+          ? CustomButtonLoading()
+          : Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 30,
+                vertical: 10,
+              ),
+              height: 50,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: handleLogin,
+                style: btnStyle,
+                child: Text(
+                  'Sign In',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: medium,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            );
     }
 
     Widget passwordInput() {
@@ -89,6 +136,7 @@ class SignInPage extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: passwordController,
                         style: whiteTextStyle,
                         obscureText: true,
                         decoration: InputDecoration.collapsed(
@@ -140,6 +188,7 @@ class SignInPage extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
+                        controller: emailController,
                         style: whiteTextStyle,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Email Address',

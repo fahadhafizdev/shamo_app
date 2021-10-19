@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/models/user_model.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_button_profile_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     Widget header() {
       return AppBar(
         backgroundColor: darkPurple,
@@ -21,8 +27,9 @@ class ProfilePage extends StatelessWidget {
                   width: 64,
                   margin: EdgeInsets.only(right: 16),
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
                     image: DecorationImage(
-                      image: AssetImage('assets/images/user_photo.png'),
+                      image: NetworkImage('${user.photoUrl}'),
                     ),
                   ),
                 ),
@@ -31,14 +38,14 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hallo, Hafiz',
+                        'Hallo, ${user.name}',
                         style: whiteTextStyle.copyWith(
                           fontWeight: semiBold,
                           fontSize: 24,
                         ),
                       ),
                       Text(
-                        '@hafizudin.d',
+                        '@${user.username}',
                         style: blackTextStyle.copyWith(fontSize: 16),
                       )
                     ],

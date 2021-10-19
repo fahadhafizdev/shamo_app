@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/models/user_model.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     Widget header() {
       return AppBar(
         backgroundColor: darkPurple,
@@ -58,7 +64,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: whiteTextStyle,
               decoration: InputDecoration(
-                hintText: 'Fahad Hafiz',
+                hintText: '${user.name}',
                 hintStyle: whiteTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: blackColor),
@@ -88,7 +94,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: whiteTextStyle,
               decoration: InputDecoration(
-                hintText: 'hafizudin.d',
+                hintText: '@${user.username}',
                 hintStyle: whiteTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: blackColor),
@@ -118,7 +124,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: whiteTextStyle,
               decoration: InputDecoration(
-                hintText: 'fahadhafiz.dev@gmail.com',
+                hintText: '${user.email}',
                 hintStyle: whiteTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: blackColor),
@@ -135,16 +141,22 @@ class EditProfilePage extends StatelessWidget {
 
     Widget content() {
       return Container(
-        padding: EdgeInsets.symmetric(
+        margin: EdgeInsets.symmetric(
           vertical: 30,
           horizontal: 30,
         ),
         child: Column(
           children: [
-            Image.asset(
-              'assets/images/user_photo.png',
+            Container(
               height: 100,
               width: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage('${user.photoUrl}'),
+                ),
+              ),
             ),
             nameInput(),
             usernameInput(),

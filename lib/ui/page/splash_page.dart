@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class SplashPage extends StatefulWidget {
@@ -11,10 +13,20 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Timer(Duration(seconds: 4), () {
+    // Timer(Duration(seconds: 4), () {
+    //   Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
+    // });
+    getInit();
+    super.initState();
+  }
+
+  getInit() async {
+    // await Provider.of<ProductProvider>(context, listen: false).getProducts();
+    // Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
+    Timer(Duration(seconds: 4), () async {
+      await Provider.of<ProductProvider>(context, listen: false).getProducts();
       Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
     });
-    super.initState();
   }
 
   @override

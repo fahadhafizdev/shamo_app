@@ -31,8 +31,9 @@ class ProductModel {
     description = json['description'];
     tags = json['tags'];
     category = CategoriModel.fromJson(json['category']);
-    galleries =
-        json['galleries'].map((image) => GalleriModel.fromJson(image)).toList();
+    galleries = json['galleries']
+        .map<GalleriModel>((image) => GalleriModel.fromJson(image))
+        .toList();
     createdAt = DateTime.parse(json['created_at']);
     updatedAt = DateTime.parse(json['updated_at']);
   }

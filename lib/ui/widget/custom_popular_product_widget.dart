@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomPopularProduct extends StatelessWidget {
-  final String imageUrl;
-  final String textCategory;
-  final String name;
-  final double price;
-
-  CustomPopularProduct({
-    this.name,
-    this.imageUrl,
-    this.textCategory,
-    this.price,
-  });
+  final ProductModel products;
+  CustomPopularProduct(this.products);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +14,8 @@ class CustomPopularProduct extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.only(
-          top: defaultMargin,
-          bottom: 20,
+          top: 5,
+          bottom: 16,
         ),
         margin: EdgeInsets.only(right: defaultMargin),
         height: 278,
@@ -36,13 +28,13 @@ class CustomPopularProduct extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 120,
-              width: 215,
-              margin: EdgeInsets.only(bottom: defaultMargin),
+              height: 180,
+              width: 185,
+              margin: EdgeInsets.only(left: 20),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imageUrl),
-                ),
+                    image: NetworkImage(products.galleries[0].url),
+                    fit: BoxFit.cover),
               ),
             ),
             Container(
@@ -51,20 +43,25 @@ class CustomPopularProduct extends StatelessWidget {
                 bottom: 6,
               ),
               child: Text(
-                textCategory,
+                products.category.name,
                 style: greyTextStyle.copyWith(fontSize: 12),
+                overflow: TextOverflow.clip,
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 20,
-                bottom: 6,
-              ),
-              child: Text(
-                name,
-                style: blackTextStyle.copyWith(
-                  fontSize: 18,
-                  fontWeight: semiBold,
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: 20,
+                  bottom: 6,
+                ),
+                child: Text(
+                  products.name,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: semiBold,
+                  ),
+                  overflow: TextOverflow.clip,
+                  maxLines: 1,
                 ),
               ),
             ),
@@ -73,7 +70,7 @@ class CustomPopularProduct extends StatelessWidget {
                 left: 20,
               ),
               child: Text(
-                '\$$price',
+                '\$${products.price}',
                 style: blueTextStyle.copyWith(
                   fontSize: 14,
                   fontWeight: medium,

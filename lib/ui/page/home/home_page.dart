@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shamo_app/models/user_model.dart';
 
 import 'package:shamo_app/provider/auth_provider.dart';
+import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/customCategoryWidget.dart';
 import 'package:shamo_app/ui/widget/custom_new_product_widget.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
 
     Widget headerContent() {
       return Container(
@@ -111,28 +113,10 @@ class HomePage extends StatelessWidget {
           bottom: defaultMargin,
         ),
         child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            CustomPopularProduct(
-              name: 'COURT VISION 2.0',
-              imageUrl: 'assets/images/shoes1.png',
-              textCategory: 'Hiking',
-              price: 58.67,
-            ),
-            CustomPopularProduct(
-              name: 'SL 20 SHOES',
-              imageUrl: 'assets/images/shoes2.png',
-              textCategory: 'Hiking',
-              price: 123.82,
-            ),
-            CustomPopularProduct(
-              name: 'TERREX URBAN LOW',
-              imageUrl: 'assets/images/shoes3.png',
-              textCategory: 'Hiking',
-              price: 143.98,
-            ),
-          ],
-        ),
+            scrollDirection: Axis.horizontal,
+            children: productProvider.products
+                .map((item) => CustomPopularProduct(item))
+                .toList()),
       );
     }
 
@@ -142,32 +126,9 @@ class HomePage extends StatelessWidget {
         width: 290,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomNewProduct(
-              name: 'Predator 20.3 Firm Ground',
-              textCategory: 'Football',
-              imageUrl: 'assets/images/new_shoes1.png',
-              price: 68.47,
-            ),
-            CustomNewProduct(
-              name: 'Ultra 4D 5 Shoes',
-              textCategory: 'Football',
-              imageUrl: 'assets/images/new_shoes2.png',
-              price: 68.47,
-            ),
-            CustomNewProduct(
-              name: 'Court Vision 2.0 Shoes',
-              textCategory: 'Football',
-              imageUrl: 'assets/images/new_shoes3.png',
-              price: 68.47,
-            ),
-            CustomNewProduct(
-              name: 'LEGO® SPORT SHOES',
-              textCategory: 'Football',
-              imageUrl: 'assets/images/new_shoes4.png',
-              price: 68.47,
-            ),
-          ],
+          children: productProvider.products
+              .map((item) => CustomNewProduct(item))
+              .toList(),
         ),
       );
     }

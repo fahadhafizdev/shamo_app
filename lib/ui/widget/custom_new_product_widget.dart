@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomNewProduct extends StatelessWidget {
-  final String imageUrl;
-  final String textCategory;
-  final String name;
-  final double price;
-
-  CustomNewProduct({
-    this.name,
-    this.imageUrl,
-    this.textCategory,
-    this.price,
-  });
+  final ProductModel products;
+  CustomNewProduct(this.products);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +22,7 @@ class CustomNewProduct extends StatelessWidget {
               borderRadius: BorderRadius.circular(25),
               color: whiteColor,
               image: DecorationImage(
-                image: AssetImage(imageUrl),
+                image: NetworkImage(products.galleries[0].url),
               ),
             ),
           ),
@@ -39,13 +31,13 @@ class CustomNewProduct extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                textCategory,
+                products.category.name,
                 style: greyTextStyle.copyWith(fontSize: 12),
               ),
               Container(
                 width: 151,
                 child: Text(
-                  name,
+                  products.name,
                   style: whiteTextStyle.copyWith(
                     fontWeight: semiBold,
                     fontSize: 16,
@@ -54,7 +46,7 @@ class CustomNewProduct extends StatelessWidget {
                 ),
               ),
               Text(
-                '\$$price',
+                '\$${products.price}',
                 style: blueTextStyle.copyWith(fontWeight: medium),
               )
             ],

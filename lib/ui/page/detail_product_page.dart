@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/models/product_model.dart';
+import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shamo_app/ui/widget/custom_image_widget.dart';
 
 class DetailProductPage extends StatefulWidget {
+  final ProductModel productModel;
+  DetailProductPage(this.productModel);
   @override
   State<DetailProductPage> createState() => _DetailProductPageState();
 }
@@ -28,6 +33,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
     Future<void> showSuccessDialog() async {
       return showDialog(
         context: context,
@@ -138,10 +144,10 @@ class _DetailProductPageState extends State<DetailProductPage> {
             ),
           ),
           CarouselSlider(
-            items: images
+            items: widget.productModel.galleries
                 .map(
-                  (e) => Image.asset(
-                    e,
+                  (e) => Image.network(
+                    e.url,
                     width: double.infinity,
                     height: 310,
                     fit: BoxFit.cover,
@@ -199,15 +205,17 @@ class _DetailProductPageState extends State<DetailProductPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //NOTE:NAME
                       Text(
-                        'TERREX URBAN LOW',
+                        widget.productModel.name,
                         style: whiteTextStyle.copyWith(
                           fontSize: 18,
                           fontWeight: semiBold,
                         ),
                       ),
+                      //NOTE:CATEGORY
                       Text(
-                        'Hiking',
+                        widget.productModel.category.name,
                         style: blackTextStyle.copyWith(
                           fontSize: 12,
                           color: Color(0xff999999),
@@ -270,7 +278,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                 children: [
                   Text('Price starts from', style: whiteTextStyle),
                   Text(
-                    '\$143,98',
+                    '\$${widget.productModel.price}',
                     style: blueTextStyle.copyWith(
                       fontWeight: semiBold,
                       fontSize: 16,
@@ -294,7 +302,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: defaultMargin),
               child: Text(
-                'Unpaved trails and mixed surfaces are easywhen you have the traction and support you need. Casual enough for the daily commute.',
+                widget.productModel.description,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.left,
                 style: blackTextStyle.copyWith(fontWeight: light),
@@ -309,23 +317,32 @@ class _DetailProductPageState extends State<DetailProductPage> {
                 bottom: 12,
               ),
               child: Text(
-                'Fimiliar Shoes',
+                'Familiar Shoes',
                 style: whiteTextStyle.copyWith(fontWeight: medium),
               ),
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: imageUrl.map((imageUrl) {
+                children: productProvider.products.map((imageUrl) {
                   indexListShoes++;
-                  if (indexListShoes == 0) {
+
+                  if (indexListShoes == 0 &&
+                      (imageUrl.category.name ==
+                          widget.productModel.category.name)) {
+                    print(widget.productModel.category.name);
                     return Container(
                         margin: EdgeInsets.only(left: 14),
-                        child: CustomImage(imageUrl: imageUrl));
+                        child:
+                            CustomImage(imageUrl: imageUrl.galleries[0].url));
                   }
 
                   print(indexListShoes);
-                  return CustomImage(imageUrl: imageUrl);
+                  return CustomImage(
+                      imageUrl: (imageUrl.category.name ==
+                              widget.productModel.category.name)
+                          ? imageUrl.galleries[0].url
+                          : 'null');
                 }).toList(),
               ),
             ),

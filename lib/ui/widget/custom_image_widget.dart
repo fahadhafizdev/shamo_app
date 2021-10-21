@@ -7,17 +7,19 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 54,
-      width: 54,
-      margin: EdgeInsets.only(left: 16),
-      decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: AssetImage(imageUrl),
-        ),
-      ),
-    );
+    return (imageUrl == 'null')
+        ? Container()
+        : Container(
+            height: 54,
+            width: 54,
+            margin: EdgeInsets.only(left: 16),
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: NetworkImage(imageUrl),
+              ),
+            ),
+          );
   }
 }

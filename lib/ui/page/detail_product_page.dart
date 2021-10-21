@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/provider/product_provider.dart';
+import 'package:shamo_app/provider/wishlist_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shamo_app/ui/widget/custom_image_widget.dart';
@@ -29,11 +30,14 @@ class _DetailProductPageState extends State<DetailProductPage> {
   ];
 
   int currentIndex = 0;
-  bool isWishList = false;
 
   @override
   Widget build(BuildContext context) {
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    WishListProvider wishListProvider = Provider.of<WishListProvider>(context);
+
+    bool isWishList = wishListProvider.isWishList(widget.productModel);
+
     Future<void> showSuccessDialog() async {
       return showDialog(
         context: context,
@@ -224,13 +228,16 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     ],
                   ),
                   GestureDetector(
+                    //NOTE: WISHTLIST
                     onTap: () {
-                      setState(() {
-                        isWishList = !isWishList;
-                      });
+                      isWishList =
+                          wishListProvider.isWishList(widget.productModel);
+
+                      wishListProvider.setProducts(widget.productModel);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: isWishList
+                          duration: Duration(seconds: 1),
+                          content: !isWishList
                               ? Text(
                                   'Has been added to the Whitelist',
                                   textAlign: TextAlign.center,
@@ -239,7 +246,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                                   'Has been removed from the Whitelist',
                                   textAlign: TextAlign.center,
                                 ),
-                          backgroundColor: isWishList ? blueColor : Colors.red,
+                          backgroundColor: !isWishList ? blueColor : Colors.red,
                         ),
                       );
                     },

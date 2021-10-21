@@ -14,8 +14,10 @@ class WishListProvider with ChangeNotifier {
   setProducts(ProductModel product) {
     if (isWishList(product)) {
       _wishList.removeWhere((element) => element.id == product.id);
+      print('WishList has removed');
     } else {
       _wishList.add(product);
+      print('WishList has added');
     }
 
     notifyListeners();

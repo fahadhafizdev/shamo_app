@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/wishlist_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_header_widget.dart';
 import 'package:shamo_app/ui/widget/custom_wishlist_widget.dart';
@@ -6,6 +8,8 @@ import 'package:shamo_app/ui/widget/custom_wishlist_widget.dart';
 class WishListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    WishListProvider wishListProvider = Provider.of<WishListProvider>(context);
+
     Widget contentNoMessage() {
       return Center(
         child: Column(
@@ -49,13 +53,13 @@ class WishListPage extends StatelessWidget {
     }
 
     Widget content() {
-      return Column(
-        children: [
-          CustomWishList(),
-          CustomWishList(),
-          CustomWishList(),
-        ],
-      );
+      return (wishListProvider.wishList.isNotEmpty)
+          ? Column(
+              children: wishListProvider.wishList.map((item) {
+                return CustomWishList(item);
+              }).toList(),
+            )
+          : contentNoMessage();
     }
 
     return ListView(

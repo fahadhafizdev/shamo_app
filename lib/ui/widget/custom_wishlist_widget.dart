@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomWishList extends StatelessWidget {
+  final ProductModel products;
+  CustomWishList(this.products);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +32,7 @@ class CustomWishList extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
-                image: AssetImage('assets/images/new_shoes1.png'),
+                image: NetworkImage(products.galleries[0].url),
               ),
             ),
           ),
@@ -38,11 +42,11 @@ class CustomWishList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Terrex Urban Low',
+                  products.name,
                   overflow: TextOverflow.clip,
                   style: whiteTextStyle.copyWith(fontWeight: semiBold),
                 ),
-                Text('\$143,98', style: blueTextStyle),
+                Text('\$${products.price}', style: blueTextStyle),
               ],
             ),
           ),

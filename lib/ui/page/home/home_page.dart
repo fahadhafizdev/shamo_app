@@ -123,6 +123,21 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget listNewProductByCategory(String category) {
+      return Container(
+        margin: EdgeInsets.only(left: defaultMargin),
+        width: 290,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: productProvider.products
+              .map((item) => (category == item.category.name)
+                  ? CustomNewProduct(item)
+                  : Container())
+              .toList(),
+        ),
+      );
+    }
+
     Widget content() {
       return (statusCategoryProvider.statusCategory == 'All Shoes')
           ? Column(
@@ -134,7 +149,7 @@ class HomePage extends StatelessWidget {
                 listNewProduct(),
               ],
             )
-          : Container();
+          : listNewProductByCategory(statusCategoryProvider.statusCategory);
     }
 
     return ListView(

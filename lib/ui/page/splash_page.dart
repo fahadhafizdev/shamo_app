@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/category_provider.dart';
 import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 
@@ -25,6 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     // Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
     Timer(Duration(seconds: 4), () async {
       await Provider.of<ProductProvider>(context, listen: false).getProducts();
+      await Provider.of<CategoryProvider>(context, listen: false).getCategory();
       Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
     });
   }

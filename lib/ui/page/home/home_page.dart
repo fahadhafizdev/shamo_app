@@ -5,6 +5,7 @@ import 'package:shamo_app/models/user_model.dart';
 import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/provider/category_provider.dart';
 import 'package:shamo_app/provider/product_provider.dart';
+import 'package:shamo_app/provider/status_category_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/customCategoryWidget.dart';
 import 'package:shamo_app/ui/widget/custom_new_product_widget.dart';
@@ -17,6 +18,8 @@ class HomePage extends StatelessWidget {
     UserModel user = authProvider.user;
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
     CategoryProvider categoryProvider = Provider.of<CategoryProvider>(context);
+    StatusCategoryProvider statusCategoryProvider =
+        Provider.of<StatusCategoryProvider>(context);
 
     Widget headerContent() {
       return Container(
@@ -120,14 +123,25 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget content() {
+      return (statusCategoryProvider.statusCategory == 'All Shoes')
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                titleProduct('Popular Products'),
+                listPopularProduct(),
+                titleProduct('New Arrivals'),
+                listNewProduct(),
+              ],
+            )
+          : Container();
+    }
+
     return ListView(
       children: [
         headerContent(),
         categoryContent(),
-        titleProduct('Popular Products'),
-        listPopularProduct(),
-        titleProduct('New Arrivals'),
-        listNewProduct(),
+        content(),
       ],
     );
   }

@@ -41,7 +41,10 @@ class WishListPage extends StatelessWidget {
               width: 152,
               child: ElevatedButton(
                 style: btnStyle,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/main-page', (route) => false);
+                },
                 child: Text(
                   'Explore Store',
                 ),

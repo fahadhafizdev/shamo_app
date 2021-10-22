@@ -6,7 +6,7 @@ class CustomCategory extends StatelessWidget {
   final bool isActive;
   CustomCategory({
     this.text,
-    this.isActive,
+    this.isActive = false,
   });
 
   @override

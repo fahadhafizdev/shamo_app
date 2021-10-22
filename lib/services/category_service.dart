@@ -15,11 +15,18 @@ class CategoryService {
 
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body)['data']['data'];
-      List<CategoriModel> category = data
-          .map(
-            (item) => CategoriModel.fromJson(item),
-          )
-          .toList();
+
+      List<CategoriModel> category = [];
+
+      print('panjang list = ${data.length}');
+
+      for (int i = data.length - 1; i >= 0; i--) {
+        category.add(CategoriModel.fromJson(data[i]));
+      }
+
+      //note:tes
+      category.map((e) => print(e.name)).toList();
+
       return category;
     } else {
       throw Exception('get category gagal');

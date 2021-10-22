@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shamo_app/models/user_model.dart';
 
 import 'package:shamo_app/provider/auth_provider.dart';
+import 'package:shamo_app/provider/category_provider.dart';
 import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/customCategoryWidget.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    CategoryProvider categoryProvider = Provider.of<CategoryProvider>(context);
 
     Widget headerContent() {
       return Container(
@@ -63,28 +65,13 @@ class HomePage extends StatelessWidget {
         height: 40,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: [
-            CustomCategory(
-              text: 'All Shoes',
-              isActive: true,
-            ),
-            CustomCategory(
-              text: 'Running',
-              isActive: false,
-            ),
-            CustomCategory(
-              text: 'Training',
-              isActive: false,
-            ),
-            CustomCategory(
-              text: 'Basketball',
-              isActive: false,
-            ),
-            CustomCategory(
-              text: 'School',
-              isActive: false,
-            ),
-          ],
+          children: categoryProvider.category
+              .map(
+                (itemCategory) => CustomCategory(
+                  text: itemCategory.name,
+                ),
+              )
+              .toList(),
         ),
       );
     }

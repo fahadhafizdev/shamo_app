@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/provider/category_provider.dart';
 import 'package:shamo_app/provider/product_provider.dart';
+import 'package:shamo_app/provider/status_category_provider.dart';
 import 'package:shamo_app/provider/wishlist_provider.dart';
 import 'package:shamo_app/ui/page/cart_page.dart';
 import 'package:shamo_app/ui/page/checkout_details_page.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => StatusCategoryProvider(),
         ),
       ],
       child: MaterialApp(

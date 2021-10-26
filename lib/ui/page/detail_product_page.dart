@@ -143,10 +143,16 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     size: 24.0,
                   ),
                 ),
-                Icon(
-                  Icons.shopping_bag_rounded,
-                  color: darkPurple,
-                  size: 29.0,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/main-page', (route) => false);
+                  },
+                  child: Icon(
+                    Icons.shopping_bag_rounded,
+                    color: darkPurple,
+                    size: 29.0,
+                  ),
                 ),
               ],
             ),

@@ -19,9 +19,15 @@ class _CartPageState extends State<CartPage> {
     Widget header() {
       return PreferredSize(
         child: AppBar(
-          leading: Icon(
-            Icons.arrow_back_ios,
-            size: 18,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/main-page', (route) => false);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+            ),
           ),
           backgroundColor: darkPurple,
           elevation: 0,

@@ -3,7 +3,7 @@ import 'package:shamo_app/models/cart_model.dart';
 import 'package:shamo_app/models/product_model.dart';
 
 class CartProvider with ChangeNotifier {
-  List<CartModel> _carts;
+  List<CartModel> _carts = [];
 
   List<CartModel> get carts => _carts;
 
@@ -19,6 +19,7 @@ class CartProvider with ChangeNotifier {
       _carts[index].quantity++;
     } else {
       _carts.add(CartModel(id: _carts.length, product: product, quantity: 1));
+      print('cart added');
     }
 
     notifyListeners();
@@ -36,6 +37,9 @@ class CartProvider with ChangeNotifier {
 
   reduceQuantity(int id) {
     _carts[id].quantity--;
+    if (_carts[id].quantity == 0) {
+      removeAt(id);
+    }
     notifyListeners();
   }
 
@@ -59,8 +63,10 @@ class CartProvider with ChangeNotifier {
   productExist(ProductModel product) {
     if (_carts.indexWhere((element) => element.product.id == product.id) ==
         -1) {
+      print('product not exist');
       return false;
     } else {
+      print('product exist');
       return true;
     }
   }

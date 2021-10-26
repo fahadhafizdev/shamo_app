@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo_app/models/product_model.dart';
+import 'package:shamo_app/provider/cart_provider.dart';
 import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/provider/wishlist_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
@@ -35,6 +36,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
   Widget build(BuildContext context) {
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
     WishListProvider wishListProvider = Provider.of<WishListProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     bool isWishList = wishListProvider.isWishList(widget.productModel);
 
@@ -88,7 +90,9 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     width: 154,
                     child: ElevatedButton(
                       style: btnStyle,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/detail-cart');
+                      },
                       child: Text(
                         'View My Cart',
                         style: whiteTextStyle.copyWith(
@@ -381,6 +385,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                       height: 54,
                       child: ElevatedButton(
                         onPressed: () {
+                          cartProvider.addCart(widget.productModel);
                           showSuccessDialog();
                         },
                         style: btnStyle,

@@ -169,8 +169,10 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: header(),
       backgroundColor: bgColor2,
-      bottomNavigationBar: customBottomnNav(),
-      body: content(),
+      bottomNavigationBar: (cartProvider.carts.length == 0)
+          ? SizedBox(height: 100)
+          : customBottomnNav(),
+      body: (cartProvider.carts.length == 0) ? contentNoCart() : content(),
     );
   }
 }

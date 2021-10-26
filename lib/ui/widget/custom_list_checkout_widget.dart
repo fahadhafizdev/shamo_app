@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/models/cart_model.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomListCheckout extends StatelessWidget {
-  final String name;
-  final double price;
-  final int amount;
-  final String imageUrl;
+  final CartModel cart;
 
-  CustomListCheckout({this.amount, this.name, this.price, this.imageUrl});
+  CustomListCheckout(this.cart);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class CustomListCheckout extends StatelessWidget {
             decoration: BoxDecoration(
               color: whiteColor,
               image: DecorationImage(
-                image: AssetImage(imageUrl),
+                image: NetworkImage(cart.product.galleries[0].url),
               ),
               borderRadius: BorderRadius.circular(12),
             ),
@@ -47,12 +45,12 @@ class CustomListCheckout extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AutofillHints.creditCardFamilyName,
+                  cart.product.name,
                   overflow: TextOverflow.clip,
                   style: whiteTextStyle.copyWith(fontWeight: semiBold),
                 ),
                 Text(
-                  '\$$price',
+                  '\$${cart.product.price}',
                   overflow: TextOverflow.clip,
                   style: blueTextStyle,
                 ),
@@ -62,7 +60,7 @@ class CustomListCheckout extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: Text(
-              '$amount Items',
+              '${cart.quantity} Items',
               style: blackTextStyle.copyWith(
                 color: greyColor,
                 fontSize: 12,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/cart_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_list_checkout_widget.dart';
 import 'package:shamo_app/ui/widget/custom_payment_summary.widget.dart';
@@ -6,6 +8,8 @@ import 'package:shamo_app/ui/widget/custom_payment_summary.widget.dart';
 class CheckoutDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     Widget header() {
       return PreferredSize(
         child: AppBar(
@@ -82,17 +86,10 @@ class CheckoutDetailsPage extends StatelessWidget {
             ),
           ),
           //NOTE: : LIST ITEM
-          CustomListCheckout(
-            name: 'Terrex Urban Low',
-            price: 143.98,
-            amount: 2,
-            imageUrl: 'assets/images/shoes1.png',
-          ),
-          CustomListCheckout(
-            name: 'Terrex Urban Low',
-            price: 143.98,
-            amount: 3,
-            imageUrl: 'assets/images/shoes2.png',
+          Column(
+            children: cartProvider.carts
+                .map((items) => CustomListCheckout(items))
+                .toList(),
           ),
 
           //NOTE: ADDRESS DETAIL
@@ -192,15 +189,15 @@ class CheckoutDetailsPage extends StatelessWidget {
                 SizedBox(height: 1),
                 CustomPaymentSummary(
                   name: 'Product Quantity',
-                  value: '2 Items',
+                  value: '${cartProvider.totalItems()} Items',
                 ),
                 CustomPaymentSummary(
                   name: 'Product Price',
-                  value: '\$575.96',
+                  value: '\$${cartProvider.totalPrice()}',
                 ),
                 CustomPaymentSummary(
                   name: 'Shipping',
-                  value: 'Free',
+                  value: 'free',
                 ),
                 Divider(
                   color: laneColor2,
@@ -209,7 +206,7 @@ class CheckoutDetailsPage extends StatelessWidget {
                 SizedBox(height: 10),
                 CustomPaymentSummary(
                   name: 'Total',
-                  value: '\$575.92',
+                  value: '\$${cartProvider.totalPrice()}',
                 ),
               ],
             ),

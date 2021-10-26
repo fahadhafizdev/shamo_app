@@ -5,7 +5,7 @@ import 'package:shamo_app/models/cart_model.dart';
 class TransactionService {
   String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
-  Future checkout(
+  Future<bool> checkout(
       String token, List<CartModel> carts, double totalPrice) async {
     var url = '$baseUrl/checkout';
     var headers = {

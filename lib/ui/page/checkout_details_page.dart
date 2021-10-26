@@ -1,14 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/provider/cart_provider.dart';
+import 'package:shamo_app/provider/transaction_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/widget/custom_button_loading_widget.dart';
 import 'package:shamo_app/ui/widget/custom_list_checkout_widget.dart';
 import 'package:shamo_app/ui/widget/custom_payment_summary.widget.dart';
 
-class CheckoutDetailsPage extends StatelessWidget {
+class CheckoutDetailsPage extends StatefulWidget {
+  @override
+  State<CheckoutDetailsPage> createState() => _CheckoutDetailsPageState();
+}
+
+class _CheckoutDetailsPageState extends State<CheckoutDetailsPage> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
+    TransactionProvider transactionProvider =
+        Provider.of<TransactionProvider>(context);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleCheckout() async {
+      setState(() {
+        isLoading = true;
+      });
+      if (await transactionProvider.checkout(
+        authProvider.user.token,
+        cartProvider.carts,
+        cartProvider.totalPrice(),
+      )) {
+        cartProvider.carts = [];
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/checkout-success', (route) => false);
+      }
+    }
 
     Widget header() {
       return PreferredSize(
@@ -41,26 +72,27 @@ class CheckoutDetailsPage extends StatelessWidget {
               thickness: 0.5,
               color: laneColor,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-              margin: EdgeInsets.symmetric(vertical: defaultMargin),
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                style: btnStyle,
-                onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/checkout-success', (route) => false);
-                },
-                child: Text(
-                  'Checkout Now',
-                  style: whiteTextStyle.copyWith(
-                    fontWeight: semiBold,
-                    fontSize: 16,
+            isLoading
+                ? Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: CustomButtonLoading())
+                : Container(
+                    padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+                    margin: EdgeInsets.symmetric(vertical: defaultMargin),
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: btnStyle,
+                      onPressed: handleCheckout,
+                      child: Text(
+                        'Checkout Now',
+                        style: whiteTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
           ],
         ),
       );

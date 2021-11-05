@@ -31,6 +31,14 @@ dependencies:
   carousel_slider: ^4.0.0
   provider: ^4.3.3
   http: ^0.12.2
+  flutter_launcher_icons: ^0.8.1
+  cloud_firestore: ^0.16.0+1
+  firebase_core: ^0.7.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo_app.png"
 
 dev_dependencies:
   flutter_test:

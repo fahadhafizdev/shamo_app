@@ -6,6 +6,7 @@ import 'package:shamo_app/provider/product_provider.dart';
 import 'package:shamo_app/provider/wishlist_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:shamo_app/ui/page/detail_chat_page.dart';
 import 'package:shamo_app/ui/widget/custom_image_widget.dart';
 
 class DetailProductPage extends StatefulWidget {
@@ -368,12 +369,19 @@ class _DetailProductPageState extends State<DetailProductPage> {
                 left: defaultMargin,
                 right: defaultMargin,
                 top: defaultMargin,
+                bottom: 12,
               ),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/detail-chat-page');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailChatPage(widget.productModel),
+                        ),
+                      );
                     },
                     child: Container(
                       margin: EdgeInsets.only(right: 16),

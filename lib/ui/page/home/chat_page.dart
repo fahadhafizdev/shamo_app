@@ -55,8 +55,6 @@ class ChatPage extends StatelessWidget {
       return Column(
         children: [
           CustomChatWidget(),
-          CustomChatWidget(),
-          CustomChatWidget(),
         ],
       );
     }

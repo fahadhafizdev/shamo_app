@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/shared/theme.dart';
+import 'package:shamo_app/ui/page/detail_chat_page.dart';
 
 class CustomChatWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detail-chat-page');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailChatPage(UninitializedProductModel()),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.symmetric(

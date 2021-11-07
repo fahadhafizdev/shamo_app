@@ -6,7 +6,32 @@ import 'package:shamo_app/models/user_model.dart';
 class MessageService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Stream<List<MessageModel>> getMessageByUserId({int userId}) {
+  // Stream<List<MessageModel>> getMessageByUserId({int userId}) {
+  //   try {
+  //     return firestore
+  //         .collection('messages')
+  //         .where('userId', isEqualTo: userId)
+  //         .snapshots()
+  //         .map((QuerySnapshot list) {
+  //       var result = list.docs.map<MessageModel>((DocumentSnapshot message) {
+  //         print(message.data());
+  //         return MessageModel.fromJson(message.data());
+  //       }).toList();
+
+  //       //Note: method untuk sorting
+  //       result.sort(
+  //         (MessageModel a, MessageModel b) =>
+  //             a.createdAt.compareTo(b.createdAt),
+  //       );
+
+  //       return result;
+  //     });
+  //   } catch (e) {
+  //     throw Exception(e);
+  //   }
+  // }
+
+  Stream<List<MessageModel>> getMessagesByUserId({int userId}) {
     try {
       return firestore
           .collection('messages')
@@ -18,7 +43,6 @@ class MessageService {
           return MessageModel.fromJson(message.data());
         }).toList();
 
-        //Note: method untuk sorting
         result.sort(
           (MessageModel a, MessageModel b) =>
               a.createdAt.compareTo(b.createdAt),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo_app/models/message_model.dart';
 import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/services/message_service.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_chat_buble_widget.dart';
+import 'package:shamo_app/ui/widget/custom_chat_widget.dart';
 
 class DetailChatPage extends StatefulWidget {
   ProductModel product;
@@ -144,26 +146,57 @@ class _DetailChatPageState extends State<DetailChatPage> {
       );
     }
 
+    //NOTE: REST API with streamBuilder
     Widget chatList() {
-      return ListView(
-        padding: EdgeInsets.symmetric(
-          horizontal: defaultMargin,
-        ),
-        children: [
-          CustomChatBuble(
-            text:
-                'Hi, This item is still availablessssssssssssssssssssssssssssssssssssss?',
-            isSender: true,
-            hasProduct: true,
-          ),
-          CustomChatBuble(
-            text:
-                'Hi, yes this item is availablesssssssssssssssssssssssssssssssssssssssssssssssssss',
-            isSender: false,
-          ),
-        ],
-      );
+      return StreamBuilder<List<MessageModel>>(
+          stream: MessageService()
+              .getMessagesByUserId(userId: authProvider.user.id),
+          builder: (context, snapshot) {
+            print(snapshot.data);
+            if (snapshot.hasData) {
+              return ListView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: defaultMargin,
+                  ),
+                  children: snapshot.data
+                      .map((MessageModel message) => CustomChatBuble(
+                            isSender: message.isFromUser,
+                            text: message.message,
+                          ))
+                      .toList());
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          });
     }
+
+    // Widget chatList() {
+    //   return StreamBuilder<List<MessageModel>>(
+    //       stream: MessageService()
+    //           .getMessagesByUserId(userId: authProvider.user.id),
+    //       builder: (context, snapshot) {
+    //         print(snapshot.data);
+    //         if (snapshot.hasData) {
+    //           return ListView(
+    //             padding: EdgeInsets.symmetric(
+    //               horizontal: defaultMargin,
+    //             ),
+    //             children: snapshot.data
+    //                 .map((MessageModel message) => CustomChatBuble(
+    //                       isSender: message.isFromUser,
+    //                       text: message.message,
+    //                     ))
+    //                 .toList(),
+    //           );
+    //         } else {
+    //           return Center(
+    //             child: CircularProgressIndicator(),
+    //           );
+    //         }
+    //       });
+    // }
 
     Widget chatInput() {
       return Align(

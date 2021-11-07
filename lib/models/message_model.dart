@@ -21,13 +21,38 @@ class MessageModel {
     this.userName,
   });
 
+  // MessageModel.fromJson(Map<String, dynamic> json) {
+  //   message = json['message'];
+  //   userId = json['userId'];
+  //   userName = json['userName'];
+  //   userImage = json['userImage'];
+  //   isFromUser = json['isFromUser'];
+  //   product = json[product].isEmpty
+  //       ? UninitializedProductModel()
+  //       : ProductModel.fromJson(json['product']);
+  //   createdAt = DateTime.parse(json['createdAt']);
+  //   updatedAt = DateTime.parse(json['updatedAt']);
+  // }
+
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'message': message,
+  //     'userId': userId,
+  //     'userName': userName,
+  //     'userImage': userImage,
+  //     'isFromUser': isFromUser,
+  //     'product': product is UninitializedProductModel ? {} : product.toJson(),
+  //     'createdAt': createdAt.toString(),
+  //     'updatedAt': updatedAt.toString(),
+  //   };
+  // }
   MessageModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     userId = json['userId'];
     userName = json['userName'];
     userImage = json['userImage'];
     isFromUser = json['isFromUser'];
-    product = json[product] == {}
+    product = json['product'].isEmpty
         ? UninitializedProductModel()
         : ProductModel.fromJson(json['product']);
     createdAt = DateTime.parse(json['createdAt']);
@@ -42,8 +67,8 @@ class MessageModel {
       'userImage': userImage,
       'isFromUser': isFromUser,
       'product': product is UninitializedProductModel ? {} : product.toJson(),
-      'created_at': createdAt.toString(),
-      'updated_at': updatedAt.toString(),
+      'createdAt': createdAt.toString(),
+      'updatedAt': updatedAt.toString(),
     };
   }
 }

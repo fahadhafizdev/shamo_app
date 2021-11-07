@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shamo_app/models/product_model.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
+import 'package:shamo_app/services/message_service.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_chat_buble_widget.dart';
 
@@ -12,8 +15,26 @@ class DetailChatPage extends StatefulWidget {
 }
 
 class _DetailChatPageState extends State<DetailChatPage> {
+  TextEditingController messageController = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleAddMessage() async {
+      await MessageService().addMessage(
+        message: messageController.text,
+        user: authProvider.user,
+        product: widget.product,
+        isFromUser: true,
+      );
+
+      setState(() {
+        widget.product = UninitializedProductModel();
+        messageController.text = '';
+      });
+    }
+
     Widget header() {
       return PreferredSize(
         child: AppBar(
@@ -169,6 +190,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
                       ),
                       child: TextFormField(
                         style: whiteTextStyle,
+                        controller: messageController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Typle Message...',
                           hintStyle: blackTextStyle,
@@ -177,9 +199,12 @@ class _DetailChatPageState extends State<DetailChatPage> {
                     ),
                   ),
                   SizedBox(width: 20),
-                  Image.asset(
-                    'assets/images/btn_send.png',
-                    height: 45,
+                  GestureDetector(
+                    onTap: handleAddMessage,
+                    child: Image.asset(
+                      'assets/images/btn_send.png',
+                      height: 45,
+                    ),
                   ),
                 ],
               ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shamo_app/models/product_model.dart';
 import 'package:shamo_app/shared/theme.dart';
 
 class CustomChatBuble extends StatelessWidget {
   final String text;
   final bool isSender;
-  final bool hasProduct;
+  final ProductModel product;
 
   CustomChatBuble({
     this.text,
     this.isSender,
-    this.hasProduct = false,
+    this.product,
   });
 
   @override
@@ -36,8 +37,8 @@ class CustomChatBuble extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'assets/images/new_shoes1.png',
+                  child: Image.network(
+                    product.galleries[0].url,
                     height: 70,
                   ),
                 ),
@@ -46,7 +47,7 @@ class CustomChatBuble extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'COURT VISION 2.0 SHOES',
+                        product.name,
                         style: whiteTextStyle,
                         overflow: TextOverflow.clip,
                       ),
@@ -97,7 +98,7 @@ class CustomChatBuble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          hasProduct ? productReview() : SizedBox(),
+          product is! UninitializedProductModel ? productReview() : SizedBox(),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,

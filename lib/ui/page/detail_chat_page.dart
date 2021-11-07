@@ -162,6 +162,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
                       .map((MessageModel message) => CustomChatBuble(
                             isSender: message.isFromUser,
                             text: message.message,
+                            product: message.product,
                           ))
                       .toList());
             } else {

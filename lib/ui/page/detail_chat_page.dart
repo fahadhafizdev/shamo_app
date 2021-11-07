@@ -44,33 +44,36 @@ class _DetailChatPageState extends State<DetailChatPage> {
           ),
           backgroundColor: darkPurple,
           centerTitle: false,
-          title: Row(
-            children: [
-              Image.asset(
-                'assets/images/logo_round_online.png',
-                height: 50,
-              ),
-              SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Shoe Store',
-                    style: whiteTextStyle.copyWith(
-                      fontWeight: medium,
-                      fontSize: 14,
+          title: Container(
+            margin: EdgeInsets.only(top: 5),
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/images/logo_round_online.png',
+                  height: 50,
+                ),
+                SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Shoe Store',
+                      style: whiteTextStyle.copyWith(
+                        fontWeight: medium,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Online',
-                    style: blackTextStyle.copyWith(
-                      fontWeight: light,
-                      fontSize: 14,
+                    Text(
+                      'Online',
+                      style: blackTextStyle.copyWith(
+                        fontWeight: light,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         preferredSize: Size.fromHeight(70),

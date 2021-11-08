@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo_app/models/user_model.dart';
 import 'package:shamo_app/provider/auth_provider.dart';
+import 'package:shamo_app/provider/page_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_button_profile_widget.dart';
 
@@ -9,6 +10,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
     UserModel user = authProvider.user;
 
     Widget header() {
@@ -51,10 +53,17 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Image.asset(
-                  'assets/images/icon_exit.png',
-                  height: 20,
-                  width: 20,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (route) => false);
+                    pageProvider.setCurrentIndex = 0;
+                  },
+                  child: Image.asset(
+                    'assets/images/icon_exit.png',
+                    height: 20,
+                    width: 20,
+                  ),
                 ),
               ],
             ),

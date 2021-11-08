@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo_app/provider/page_provider.dart';
 import 'package:shamo_app/provider/wishlist_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_header_widget.dart';
@@ -9,6 +10,7 @@ class WishListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WishListProvider wishListProvider = Provider.of<WishListProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
 
     Widget contentNoMessage() {
       return Center(
@@ -42,8 +44,7 @@ class WishListPage extends StatelessWidget {
               child: ElevatedButton(
                 style: btnStyle,
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/main-page', (route) => false);
+                  pageProvider.setCurrentIndex = 0;
                 },
                 child: Text(
                   'Explore Store',

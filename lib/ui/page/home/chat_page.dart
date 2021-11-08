@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo_app/models/message_model.dart';
+import 'package:shamo_app/provider/auth_provider.dart';
+import 'package:shamo_app/services/message_service.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_chat_widget.dart';
 import 'package:shamo_app/ui/widget/custom_header_widget.dart';
@@ -6,6 +10,8 @@ import 'package:shamo_app/ui/widget/custom_header_widget.dart';
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
     Widget contentNoMessage() {
       return Center(
         child: Column(
@@ -40,7 +46,10 @@ class ChatPage extends StatelessWidget {
               width: 152,
               child: ElevatedButton(
                 style: btnStyle,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/main-page', (route) => false);
+                },
                 child: Text(
                   'Explore Store',
                 ),
@@ -52,11 +61,21 @@ class ChatPage extends StatelessWidget {
     }
 
     Widget content() {
-      return Column(
-        children: [
-          CustomChatWidget(),
-        ],
-      );
+      return StreamBuilder<List<MessageModel>>(
+          stream: MessageService()
+              .getMessagesByUserId(userId: authProvider.user.id),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data.length == 0) {
+                return contentNoMessage();
+              }
+              return Column(
+                children: [CustomChatWidget(snapshot.data.last.message)],
+              );
+            } else {
+              return contentNoMessage();
+            }
+          });
     }
 
     return ListView(

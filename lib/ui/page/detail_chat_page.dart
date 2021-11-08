@@ -40,9 +40,14 @@ class _DetailChatPageState extends State<DetailChatPage> {
     Widget header() {
       return PreferredSize(
         child: AppBar(
-          leading: Icon(
-            Icons.arrow_back_ios,
-            size: 18,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+            ),
           ),
           backgroundColor: darkPurple,
           centerTitle: false,
@@ -172,32 +177,6 @@ class _DetailChatPageState extends State<DetailChatPage> {
             }
           });
     }
-
-    // Widget chatList() {
-    //   return StreamBuilder<List<MessageModel>>(
-    //       stream: MessageService()
-    //           .getMessagesByUserId(userId: authProvider.user.id),
-    //       builder: (context, snapshot) {
-    //         print(snapshot.data);
-    //         if (snapshot.hasData) {
-    //           return ListView(
-    //             padding: EdgeInsets.symmetric(
-    //               horizontal: defaultMargin,
-    //             ),
-    //             children: snapshot.data
-    //                 .map((MessageModel message) => CustomChatBuble(
-    //                       isSender: message.isFromUser,
-    //                       text: message.message,
-    //                     ))
-    //                 .toList(),
-    //           );
-    //         } else {
-    //           return Center(
-    //             child: CircularProgressIndicator(),
-    //           );
-    //         }
-    //       });
-    // }
 
     Widget chatInput() {
       return Align(

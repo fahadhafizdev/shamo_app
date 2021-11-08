@@ -4,6 +4,9 @@ import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/page/detail_chat_page.dart';
 
 class CustomChatWidget extends StatelessWidget {
+  String message;
+  CustomChatWidget(this.message);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -61,7 +64,7 @@ class CustomChatWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    'Good night, This item is on hello world',
+                    message,
                     style: blackTextStyle.copyWith(
                       fontWeight: light,
                     ),

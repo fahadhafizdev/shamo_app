@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo_app/models/message_model.dart';
 import 'package:shamo_app/provider/auth_provider.dart';
+import 'package:shamo_app/provider/page_provider.dart';
 import 'package:shamo_app/services/message_service.dart';
 import 'package:shamo_app/shared/theme.dart';
 import 'package:shamo_app/ui/widget/custom_chat_widget.dart';
@@ -11,6 +12,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
 
     Widget contentNoMessage() {
       return Center(
@@ -47,8 +49,7 @@ class ChatPage extends StatelessWidget {
               child: ElevatedButton(
                 style: btnStyle,
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/main-page', (route) => false);
+                  pageProvider.setCurrentIndex = 0;
                 },
                 child: Text(
                   'Explore Store',
@@ -72,8 +73,10 @@ class ChatPage extends StatelessWidget {
               return Column(
                 children: [CustomChatWidget(snapshot.data.last.message)],
               );
-            } else {
+            } else if (!snapshot.hasData) {
               return contentNoMessage();
+            } else {
+              return Center(child: CircularProgressIndicator());
             }
           });
     }

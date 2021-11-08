@@ -6,6 +6,39 @@ import 'package:http/http.dart' as http;
 class AuthService {
   String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
+  Future<bool> updateProfil({
+    String name,
+    String username,
+    String email,
+    String token,
+  }) async {
+    var url = '$baseUrl/user';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    };
+    var body = jsonEncode({
+      'name': name,
+      'email': email,
+      'username': username,
+    });
+
+    var response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    print('${response.statusCode}');
+    print('${response.body}');
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Gagal Update Data');
+    }
+  }
+
   Future<UserModel> register({
     String name,
     String username,

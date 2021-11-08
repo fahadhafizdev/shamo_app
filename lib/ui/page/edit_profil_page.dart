@@ -4,7 +4,16 @@ import 'package:shamo_app/models/user_model.dart';
 import 'package:shamo_app/provider/auth_provider.dart';
 import 'package:shamo_app/shared/theme.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  TextEditingController nameController = TextEditingController(text: '');
+  TextEditingController usernameController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
@@ -62,6 +71,7 @@ class EditProfilePage extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: nameController,
               style: whiteTextStyle,
               decoration: InputDecoration(
                 hintText: '${user.name}',
@@ -92,6 +102,7 @@ class EditProfilePage extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: usernameController,
               style: whiteTextStyle,
               decoration: InputDecoration(
                 hintText: '@${user.username}',
@@ -122,6 +133,7 @@ class EditProfilePage extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: emailController,
               style: whiteTextStyle,
               decoration: InputDecoration(
                 hintText: '${user.email}',

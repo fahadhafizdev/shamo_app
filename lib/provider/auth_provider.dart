@@ -12,6 +12,29 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> updateProfile({
+    String name,
+    String username,
+    String email,
+    String token,
+  }) async {
+    try {
+      if (await AuthService().updateProfil(
+        email: email,
+        name: name,
+        username: username,
+        token: token,
+      )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<bool> register({
     String name,
     String username,

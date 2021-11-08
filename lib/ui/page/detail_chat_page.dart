@@ -159,17 +159,20 @@ class _DetailChatPageState extends State<DetailChatPage> {
           builder: (context, snapshot) {
             print(snapshot.data);
             if (snapshot.hasData) {
-              return ListView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: defaultMargin,
-                  ),
-                  children: snapshot.data
-                      .map((MessageModel message) => CustomChatBuble(
-                            isSender: message.isFromUser,
-                            text: message.message,
-                            product: message.product,
-                          ))
-                      .toList());
+              return Container(
+                margin: EdgeInsets.only(bottom: 70),
+                child: ListView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: defaultMargin,
+                    ),
+                    children: snapshot.data
+                        .map((MessageModel message) => CustomChatBuble(
+                              isSender: message.isFromUser,
+                              text: message.message,
+                              product: message.product,
+                            ))
+                        .toList()),
+              );
             } else {
               return Center(
                 child: CircularProgressIndicator(),
